@@ -6,7 +6,7 @@ Everything below can be checked on https://explorer.arc.io. Nothing here claims 
 
 - Every ArcStockpad launch is a **real Uniswap V4 pool from block one** (the whole supply is one hook-owned, permanently locked position), so existing V4 indexers already see trades. This guide covers what an integrator needs on top of that: the **launchpad label, curve progress and "bonded / migrated" status**.
 - Contracts are **verified on the Arc explorer** (full source match): factory, hook, bootstrap, registry, valuation policy, price adapters and the token implementation.
-- One token has already gone through the full lifecycle on mainnet (launch → curve → bonded at 17,000 USDC FDV). **All hook builds share the same events, selectors and `launches()` layout**, so one adapter covers every address in the table below.
+- Multiple tokens have already gone through the full lifecycle on mainnet (launch → curve → bonded at 17,000 USDC FDV), including $ASPAD on the current v2.4 build. **All hook builds share the same events, selectors and `launches()` layout**, so one adapter covers every address in the table below.
 
 ## Chain and addresses (Arc mainnet, chain ID 5042)
 
@@ -24,7 +24,12 @@ Everything below can be checked on https://explorer.arc.io. Nothing here claims 
 | Token implementation | ArcRewardToken (ERC-20, 1,000,000,000 fixed supply, 18 dp) — e.g. NOVA `0x7a6239e50274C70D7f2BBA43A6d9d100752e37c0` (verified) |
 | Quote assets | USDC `0x3600000000000000000000000000000000000000` (6 dp) plus registry-approved stock tokens (NVDA, CRCL, GME, SPY…) and crypto (cirBTC, EURC, WETH — EURC/WETH priced on Aerodrome Slipstream TWAPs) |
 
-Worked example — **NOVA / NVDA** (launched on the v2.2 hook, graduated 2026-09-16):
+Worked example — **$ASPAD / USDC** (launched and bonded on the current v2.4 hook):
+- token `0x3Dd6Db0F20D747e1274839Cdd6724Cc5Df1fb813`, poolId `0x62048ba5a1ae633e1b2aef70a5261db53799ecf2e5754d680ed89d9c8e91c31d`
+- launch tx `0xc87ed908f77689b5b488c8008e23c18ecf0ecbd5ee504f6063fc5e72ff2d637a` (block 21332455), bonded tx `0x13d8fd71ca0ab0dd5188f01ed3f299e3e29c7280e5bee22d460d641bc131dca4` (block 21334830)
+- DexScreener already indexes it as Uniswap V4: https://dexscreener.com/arc/0x62048ba5a1ae633e1b2aef70a5261db53799ecf2e5754d680ed89d9c8e91c31d
+
+Earlier example — **NOVA / NVDA** (launched on the legacy v2.2 hook, graduated 2026-09-16):
 - token `0x7a6239e50274C70D7f2BBA43A6d9d100752e37c0`, poolId `0x5e986747844a281809f17843e453ce4ba79bdf98446701fb2135beac2048cff5`
 - launch tx `0xcdf96361…b958` (block ~21170766), graduation tx `0x4515ae53c70f855ff55d97834f0415aae14db8f8a14bcdc904eb2f35b0d1e401` (block 21174509)
 - DexScreener already indexes it as Uniswap V4: https://dexscreener.com/arc/0x5e986747844a281809f17843e453ce4ba79bdf98446701fb2135beac2048cff5

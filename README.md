@@ -6,6 +6,7 @@
 
 - App: https://arcstockpad.com
 - X: https://x.com/ARCSTOCKPAD
+- Telegram: https://t.me/arcstockpad
 - Docs: https://arcstockpad.com/docs
 
 This repository is the public reference for **integrators** (terminals, trackers, bots) and for anyone who wants to check what is deployed. It contains addresses, ABIs and the integration guide. The application code is not published here.
@@ -47,6 +48,8 @@ All source-verified on https://explorer.arc.io. Machine-readable copy: [`address
 | Uniswap V4 PoolManager (Arc) | `0x8366a39cc670b4001a1121b8f6a443a643e40951` |
 
 Legacy builds keep serving the coins launched on them. All builds share the same events, selectors and `launches()` layout, so one adapter covers every address above.
+
+**Live example — $ASPAD** (launched and bonded on curve-v2.4): token [`0x3Dd6Db0F20D747e1274839Cdd6724Cc5Df1fb813`](https://explorer.arc.io/address/0x3Dd6Db0F20D747e1274839Cdd6724Cc5Df1fb813) · [chart](https://arcstockpad.com/token/0x3Dd6Db0F20D747e1274839Cdd6724Cc5Df1fb813) · [DexScreener](https://dexscreener.com/arc/0x62048ba5a1ae633e1b2aef70a5261db53799ecf2e5754d680ed89d9c8e91c31d) — USDC pair, creator-rewards mode, real Uniswap V4 pool from launch.
 
 ## For integrators
 

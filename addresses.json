@@ -1,0 +1,36 @@
+{
+  "chain": {
+    "name": "Arc Mainnet",
+    "chainId": 5042,
+    "rpc": "https://rpc.mainnet.arc.io",
+    "explorer": "https://explorer.arc.io",
+    "gasToken": "USDC"
+  },
+  "launchpad": {
+    "version": "curve-v2.4",
+    "hook": "0xe92F7b4362EDEd62Ed7A10Ac90262B0bF4552840",
+    "factory": "0x79Cc46Bf4F5c1cC42e81259E957BCF9a9D3b08ea",
+    "deployTx": "0x29bfcf91a006da10cd88fbdbe153e6e6efbac0472782af6ccc666f507b667b3a"
+  },
+  "legacy": [
+    {
+      "version": "curve-v2.3",
+      "hook": "0x73FaA75815D3239834262aac97F6C5b51efE2840",
+      "factory": "0x61dE1811f521f7A76A520c843569586f4782BFFa"
+    },
+    {
+      "version": "curve-v2.2",
+      "hook": "0xcfBf5dBA3452dE0DF43CAC899ed74393e811A840",
+      "factory": "0x37012298CeF699BDf7057c5B22Ec9dc075A1F651"
+    }
+  ],
+  "shared": {
+    "poolManager": "0x8366a39cc670b4001a1121b8f6a443a643e40951",
+    "stateView": "0xf3334192d15450cdd385c8b70e03f9a6bd9e673b",
+    "swapper": "0x83cc33fD588A206c27f6B5c26F13Af3e7231e31D",
+    "stockAssetRegistry": "0xf6EA18321A378C69EB4Fd3618db0f76D35f4EdF5",
+    "usdPolicy": "0x6814D60653ec70e6137Fffe42Dc8BE87F3bf9F28",
+    "treasury": "0xB99616421E36A8765C7cA854978c53A6C73bb4eC",
+    "usdc": "0x3600000000000000000000000000000000000000"
+  }
+}

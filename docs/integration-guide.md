@@ -49,4 +49,30 @@ Earlier example — **NOVA / NVDA** (launched on the legacy v2.2 hook, graduated
 6. Chart note: on v2.4 a buy of any size that crosses the threshold is one ordinary `Swap` that fills along the same curve (no hook-originated swap, no tick-limit print, no wick). v2.3 launches bond through a thin 2% backstop plus one real-amount "park" swap whose sender is the hook; v2.2 (NOVA) predates both.
 7. Liquidity lock: on v2.4 the position is hook-owned and locked from block one; `lpLiquidity == curveLiquidity` once bonded. There is no LP token and no withdraw path in any build.
 
+## Verifying the liquidity lock (for "LP locked" badges)
+
+Checks that look for LP tokens in a burn address or in a third-party locker return nothing here, because Uniswap V4 positions are not tokens. Read the position instead:
+
+```
+StateView 0xf3334192d15450cdd385c8b70e03f9a6bd9e673b
+getPositionInfo(poolId, owner = the hook, tickLower, tickUpper, salt = 0x0) -> liquidity
+getLiquidity(poolId)                                                        -> the pool's active liquidity
+```
+
+Tick range to pass:
+
+| Build | tickLower | tickUpper |
+|---|---|---|
+| curve-v2.4 (current) | `launches(poolId).lower` if `tokenIs0`, else `-887270` | `887270` if `tokenIs0`, else `launches(poolId).upper` |
+| v2.2 / v2.3, bonded | `-887270` | `887270` |
+| v2.2 / v2.3, on the curve | `launches(poolId).lower` | `launches(poolId).upper` |
+
+The hook-owned share of `getLiquidity(poolId)` is the locked share; anything above it was added by outside LPs after bonding and is theirs to withdraw. The hook cannot withdraw its own position: in the verified source `modifyLiquidity` is called once at launch with a positive delta and afterwards only with a delta of `0` (fee collection), and there is no owner, admin, pause or upgrade path.
+
+A live, browser-side version of this check for any coin: `https://arcstockpad.com/proof/<token>`.
+
+## Token locker (optional, separate contract)
+
+Creators can also timelock their own tokens in `ArcTokenLocker` [`0x02C6C80E26198Eb4669CDF409d756d6E9D6D895e`](https://explorer.arc.io/address/0x02C6C80E26198Eb4669CDF409d756d6E9D6D895e?tab=contract) — no owner, no fee, extend-only, one vault per lock. Read `locksForToken(token)` → ids, then `getLock(id)` → `(token, owner, vault, unlockAt, createdAt, withdrawn, label)` and `lockedAmount(id)`. Events: `Locked`, `Extended`, `Added`, `OwnerChanged`, `Withdrawn`, `Swept`. Public page per lock: `https://arcstockpad.com/locker/lock/<id>`.
+
 ABIs are in [`/abi`](../abi). Contract sources are verified and readable on the Arc explorer at the addresses above.

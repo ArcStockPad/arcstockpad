@@ -9,6 +9,8 @@
 - Telegram: https://t.me/arcstockpad
 - Docs: https://arcstockpad.com/docs
 
+> **Official $ASPAD contract:** `0x3Dd6Db0F20D747e1274839Cdd6724Cc5Df1fb813` — verify it against [`addresses.json`](addresses.json) or [explorer.arc.io](https://explorer.arc.io/address/0x3Dd6Db0F20D747e1274839Cdd6724Cc5Df1fb813) before trusting any other address.
+
 This repository is the public reference for **integrators** (terminals, trackers, bots) and for anyone who wants to check what is deployed. It contains addresses, ABIs and the integration guide. The application code is not published here.
 
 ## How it works

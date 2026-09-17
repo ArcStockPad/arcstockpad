@@ -32,5 +32,14 @@
     "usdPolicy": "0x6814D60653ec70e6137Fffe42Dc8BE87F3bf9F28",
     "treasury": "0xB99616421E36A8765C7cA854978c53A6C73bb4eC",
     "usdc": "0x3600000000000000000000000000000000000000"
+  },
+  "officialToken": {
+    "symbol": "ASPAD",
+    "name": "ArcStockpad",
+    "token": "0x3Dd6Db0F20D747e1274839Cdd6724Cc5Df1fb813",
+    "quote": "USDC",
+    "poolId": "0x62048ba5a1ae633e1b2aef70a5261db53799ecf2e5754d680ed89d9c8e91c31d",
+    "launchpad": "curve-v2.4",
+    "note": "The only official ArcStockpad token. Verify any other address claiming to be $ASPAD against this one before trusting it."
   }
 }

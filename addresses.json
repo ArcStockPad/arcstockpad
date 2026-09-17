@@ -33,6 +33,13 @@
     "treasury": "0xB99616421E36A8765C7cA854978c53A6C73bb4eC",
     "usdc": "0x3600000000000000000000000000000000000000"
   },
+  "locker": {
+    "contract": "0x02C6C80E26198Eb4669CDF409d756d6E9D6D895e",
+    "vaultImplementation": "0x2badFB974F49492eb1F6023F91FEed7A5CB5d6B5",
+    "deployTx": "0xbd642feb09a686a9680ce52c90267580683ce871d39729c6e3b8e02d30bbaa55",
+    "app": "https://arcstockpad.com/locker",
+    "note": "Permissionless ERC-20 timelock. No owner, no fee, no pause, no upgrade, no early exit; one isolated vault per lock. Independent of the launchpad contracts."
+  },
   "officialToken": {
     "symbol": "ASPAD",
     "name": "ArcStockpad",

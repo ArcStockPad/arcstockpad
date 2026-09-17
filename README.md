@@ -53,6 +53,23 @@ Legacy builds keep serving the coins launched on them. All builds share the same
 
 **Live example — $ASPAD** (launched and bonded on curve-v2.4): token [`0x3Dd6Db0F20D747e1274839Cdd6724Cc5Df1fb813`](https://explorer.arc.io/address/0x3Dd6Db0F20D747e1274839Cdd6724Cc5Df1fb813) · [chart](https://arcstockpad.com/token/0x3Dd6Db0F20D747e1274839Cdd6724Cc5Df1fb813) · [DexScreener](https://dexscreener.com/arc/0x62048ba5a1ae633e1b2aef70a5261db53799ecf2e5754d680ed89d9c8e91c31d) — USDC pair, creator-rewards mode, real Uniswap V4 pool from launch.
 
+## Token Locker
+
+A permissionless ERC-20 timelock at https://arcstockpad.com/locker — lock any token on Arc until a date you choose and share the public proof page `arcstockpad.com/locker/<token>`.
+
+| Contract | Address |
+|---|---|
+| ArcTokenLocker | [`0x02C6C80E26198Eb4669CDF409d756d6E9D6D895e`](https://explorer.arc.io/address/0x02C6C80E26198Eb4669CDF409d756d6E9D6D895e?tab=contract) — verified |
+| ArcLockVault (implementation cloned once per lock) | [`0x2badFB974F49492eb1F6023F91FEed7A5CB5d6B5`](https://explorer.arc.io/address/0x2badFB974F49492eb1F6023F91FEed7A5CB5d6B5?tab=contract) — verified |
+
+- **No owner, no fee, no pause, no upgrade, no early exit.** Nobody — not the depositor, not ArcStockpad — can move a locked balance before its unlock time.
+- **Extend only.** A lock's date can be pushed later, never earlier.
+- **One isolated vault per lock.** Locks never share a balance, so nothing that happens to one lock can touch another.
+- **Rewards keep flowing.** Anything that arrives at a vault other than the locked token (holder rewards, airdrops) can be collected by the lock's owner at any time; the locked token itself cannot.
+- Independent of the launchpad: the hook, factory and launched tokens never call it and it has no privileges over any token.
+
+Read a lock: `getLock(id)` → `(token, owner, vault, unlockAt, createdAt, withdrawn, label)`, `lockedAmount(id)`, `locksForToken(token)`, `locksOf(owner)`. Events: `Locked`, `Extended`, `Added`, `OwnerChanged`, `Withdrawn`, `Swept`. ABIs: [`abi/ArcTokenLocker.json`](abi/ArcTokenLocker.json), [`abi/ArcLockVault.json`](abi/ArcLockVault.json).
+
 ## For integrators
 
 Start with [`docs/integration-guide.md`](docs/integration-guide.md): launch discovery (`LaunchCreated`), pool keys, curve progress, bonded status (`Graduated`), fee accounting, topics and selectors. ABIs are in [`abi/`](abi).

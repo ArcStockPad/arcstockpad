@@ -18,6 +18,20 @@ This repository is the public reference for **integrators** (terminals, trackers
 - The creator picks the pool fee. 80% goes to the launch's reward mode — **creator rewards**, **holder rewards** or **buyback & burn** — and 20% to the protocol treasury, paid automatically on every swap.
 - Gas on Arc is paid in USDC.
 
+## Safety — check it yourself
+
+Every point below can be confirmed from the verified source and live state on https://explorer.arc.io.
+
+- **Verified source.** The hook, the factory and every launched token are full-match verified on the Arc explorer.
+- **Liquidity is locked from the first block.** The launch position belongs to the hook. The hook adds liquidity once, at launch, and afterwards only collects swap fees; it has no function that decreases or withdraws that liquidity, and no LP token exists. Before a coin is bonded nobody else can add liquidity to the pool. To check a coin: Uniswap V4 StateView `getPositionInfo(poolId, hook, tickLower, tickUpper, 0x0)` returns the same liquidity as `hook.launches(poolId).curveLiquidity`.
+- **Fixed supply.** A token mints 1,000,000,000 units once, in its constructor. There is no mint function, no owner, no pause, no blacklist and no transfer tax.
+- **The fee cannot change.** The creator picks 0.1%–10% at launch; it is part of the immutable Uniswap V4 pool key.
+- **Trading cannot be paused.** The hook has no pause switch. Swaps go straight through the Uniswap V4 PoolManager with any V4 router.
+- **What the admin can do.** Pause *new launches* on the factory, change the launch fee (hard cap 50 USDC), and approve quote assets and price sources used when a *new* coin is created. Factory ownership is two-step. The treasury can claim the 20% protocol share. None of this can move a coin's liquidity, change its fee or stop its trading.
+- **No custody.** The website never holds keys; every transaction is signed in the user's own wallet.
+
+The contracts have not been audited by a third party.
+
 ## Contracts
 
 All source-verified on https://explorer.arc.io. Machine-readable copy: [`addresses.json`](addresses.json).
